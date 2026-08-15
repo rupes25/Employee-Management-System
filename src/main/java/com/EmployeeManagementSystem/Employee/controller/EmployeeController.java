@@ -3,6 +3,7 @@ package com.EmployeeManagementSystem.Employee.controller;
 import com.EmployeeManagementSystem.Employee.dto.EmployeeReq;
 import com.EmployeeManagementSystem.Employee.dto.EmployeeRes;
 import com.EmployeeManagementSystem.Employee.service.EmployeeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class EmployeeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public EmployeeRes create(@RequestBody EmployeeReq req) {
+    public EmployeeRes create(@Valid @RequestBody EmployeeReq req) {
         return employeeService.create(req);
     }
 

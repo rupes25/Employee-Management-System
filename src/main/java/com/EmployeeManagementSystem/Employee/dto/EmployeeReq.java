@@ -26,7 +26,7 @@ public class EmployeeReq {
     @Email(message = "Invalid email format")
     private String email;
 
-    @NotNull(message = "Password is required")
+    @NotBlank(message = "Password is required")
     private String password;
 
 
