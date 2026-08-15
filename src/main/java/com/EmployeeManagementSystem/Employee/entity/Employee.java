@@ -1,43 +1,37 @@
 package com.EmployeeManagementSystem.Employee.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
+@Table(name = "employees")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is required")
-    @Size(min = 3,max = 15)
-    @Pattern(
-            regexp = "^[A-Za-z ]+$",
-            message = "Name should only contain alphabets and spaces"
-    )
+    @Column(nullable = false,length = 50) // 50 ie. max length
     private String name;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Invalid email format")
+    @Column(nullable = false,unique = true,length = 50)
     private String email;
+
+    @Column(nullable = false)
     private String password;
 
-    @NotBlank(message = "Department is required")
-    @Size
-    private String department;
-    private Integer salary;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Department department;
+
+    @Column(nullable = false,precision = 12,scale = 2) //precision yani total 12 digits and scale 2 ie. decimal ke baad only 2 digits
+    private BigDecimal salary;
 
 
 }
